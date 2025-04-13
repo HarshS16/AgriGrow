@@ -189,7 +189,8 @@ const ExpertsPage = () => {
       _id: "1",
       name: "Amit Sharma",
       profession: "Agronomist",
-      image: "https://images.pexels.com/photos/7717416/pexels-photo-7717416.jpeg"
+    //   image: "https://images.pexels.com/photos/7717416/pexels-photo-7717416.jpeg"
+    image:"m1.png"
     },
     {
       _id: "2",
