@@ -16,7 +16,7 @@ const SIDEBAR_ITEMS = [
     { name: "Dashboard", icon: Flower2, color: "#097969", path: "/dashboard" },
     { name: "Analyze", icon: Search, color: "#AFE1AF", path: "/analyze" },
     { name: "Advice", icon: UserRoundSearch, color: "#00FFFF", path: "/experts" },
-    { name: "Plant Nutrition", icon: Leaf, color: "#8BC34A", path: "/plant-nutrition" },
+    // { name: "Plant Nutrition", icon: Leaf, color: "#8BC34A", path: "/plant-nutrition" },
     { name: "Manure", icon: Tractor, color: "#F9A825", path: "/manure" },
     { name: "Financial Assistance", icon: DollarSign, color: "#FFB300", path: "/financial-assistance" },
     { name: "Educational Support", icon: BookOpenText, color: "#FF5733", path: "/educational-support" },
