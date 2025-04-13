@@ -23,7 +23,7 @@ return ( <motion.header initial={{ y: -100, opacity: 0 }} animate={{ y: 0, opaci
   <div className="flex flex-col md:flex-row items-center justify-between px-6 py-4">
     <div className="flex items-center gap-3">
       <motion.img
-        src="/logo.png"
+        src="/ll.png"
         alt="Agriscan Logo"
         className="w-12 h-12 rounded-full border-2 border-white shadow-lg"
         whileHover={{ rotate: 10 }}
