@@ -196,31 +196,36 @@ const ExpertsPage = () => {
       _id: "2",
       name: "Priya Singh",
       profession: "Horticulturist",
-      image: "https://images.pexels.com/photos/3064079/pexels-photo-3064079.jpeg"
+    //   image: "https://images.pexels.com/photos/3064079/pexels-photo-3064079.jpeg"
+      image:"m2.png"
     },
     {
       _id: "3",
       name: "Ravi Kumar",
       profession: "Entomologist",
-      image: "https://images.pexels.com/photos/4372681/pexels-photo-4372681.jpeg"
+    //   image: "https://images.pexels.com/photos/4372681/pexels-photo-4372681.jpeg"x
+      image:"m3.png"
     },
     {
       _id: "4",
       name: "Anjali Verma",
       profession: "Soil Scientist",
-      image: "https://images.pexels.com/photos/3184137/pexels-photo-3184137.jpeg"
+    //   image: "https://images.pexels.com/photos/3184137/pexels-photo-3184137.jpeg"
+    image:"w2.jpg"
     },
     {
       _id: "5",
       name: "Vikram Patel",
       profession: "Plant Pathologist",
-      image: "https://images.pexels.com/photos/4372681/pexels-photo-4372681.jpeg"
+    //   image: "https://images.pexels.com/photos/4372681/pexels-photo-4372681.jpeg"
+      image:"w11.png"
     },
     {
       _id: "6",
       name: "Simran Kaur",
       profession: "Agricultural Engineer",
-      image: "https://images.pexels.com/photos/1252870/pexels-photo-1252870.jpeg"
+    //   image: "https://images.pexels.com/photos/1252870/pexels-photo-1252870.jpeg"
+      image:"w12.png"
     }
   ];
 
