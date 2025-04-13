@@ -194,7 +194,7 @@ const ExpertsPage = () => {
     },
     {
       _id: "2",
-      name: "Priya Singh",
+      name: "Vikram Patel",
       profession: "Horticulturist",
     //   image: "https://images.pexels.com/photos/3064079/pexels-photo-3064079.jpeg"
       image:"m2.png"
@@ -215,7 +215,7 @@ const ExpertsPage = () => {
     },
     {
       _id: "5",
-      name: "Vikram Patel",
+      name: "Priya Singh ",
       profession: "Plant Pathologist",
     //   image: "https://images.pexels.com/photos/4372681/pexels-photo-4372681.jpeg"
       image:"w11.png"
