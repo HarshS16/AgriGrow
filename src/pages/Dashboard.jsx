@@ -696,6 +696,180 @@
 // export default Dashboard;
 
 
+// import { useEffect, useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// const Dashboard = () => {
+//   const [reports, setReports] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [selectedReport, setSelectedReport] = useState(null);
+//   const [aiResponse, setAiResponse] = useState(null);
+//   const [loadingAI, setLoadingAI] = useState(false);
+//   const [showAIResponse, setShowAIResponse] = useState(false);
+//   const [selectedLanguage, setSelectedLanguage] = useState("English");
+
+//   const [showChat, setShowChat] = useState(false);
+//   const [chatInput, setChatInput] = useState("");
+//   const [chatResponse, setChatResponse] = useState("");
+
+//   useEffect(() => {
+//     const fetchReports = async () => {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         setError("No authentication token found.");
+//         setLoading(false);
+//         return;
+//       }
+
+//       try {
+//         const res = await fetch("https://agriback-mj37.onrender.com/api/reports", {
+//           method: "GET",
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             "Content-Type": "application/json",
+//           },
+//         });
+
+//         if (!res.ok) throw new Error(`Failed to fetch reports: ${res.status}`);
+
+//         const data = await res.json();
+//         setReports(Array.isArray(data) ? data : data.reports || []);
+//       } catch (error) {
+//         console.error("Error fetching reports:", error);
+//         setError(`Error fetching reports: ${error.message}`);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchReports();
+//   }, []);
+
+//   const handleChatSubmit = async () => {
+//     if (!chatInput.trim()) return;
+
+//     setChatResponse("Thinking...");
+
+//     try {
+//       const res = await fetch("https://agriback-mj37.onrender.com/api/gemini", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ query: chatInput, language: selectedLanguage }),
+//       });
+
+//       const data = await res.json();
+//       setChatResponse(data.result || "I couldn't find an answer.");
+//     } catch (error) {
+//       console.error("Chatbot error:", error);
+//       setChatResponse("Something went wrong.");
+//     }
+
+//     setChatInput("");
+//   };
+
+//   return (
+//     <motion.div className="bg-green-50 min-h-screen p-6"
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       transition={{ duration: 0.6 }}
+//     >
+//       <h1 className="text-3xl font-bold text-green-900 mb-6">🌾 Previous Reports</h1>
+
+//       {loading ? (
+//         <p className="text-gray-600">Loading...</p>
+//       ) : error ? (
+//         <p className="text-red-600">{error}</p>
+//       ) : reports.length === 0 ? (
+//         <p className="text-gray-600">No reports found.</p>
+//       ) : (
+//         <motion.div
+//           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+//           initial="hidden"
+//           animate="visible"
+//           variants={{
+//             hidden: {},
+//             visible: {
+//               transition: {
+//                 staggerChildren: 0.1,
+//               },
+//             },
+//           }}
+//         >
+//           {reports.map((report) => (
+//             <motion.div
+//               key={report._id || report.id}
+//               className="bg-white shadow-xl rounded-xl p-4 border border-green-100 hover:border-green-300 cursor-pointer transition-transform transform hover:scale-105"
+//               whileHover={{ scale: 1.05 }}
+//               onClick={() => setSelectedReport(report)}
+//             >
+//               <img
+//                 src={report.imageUrl || "/placeholder-image.jpg"}
+//                 alt="Report"
+//                 className="w-full h-40 object-cover rounded-md mb-4"
+//                 onError={(e) => {
+//                   e.target.src = "/placeholder-image.jpg";
+//                 }}
+//               />
+//               <p className="text-green-900 font-bold">🌿 {report.name || "Disease Report"}</p>
+//               <p className="text-gray-700"><strong>Status:</strong> {report.status || "Unknown"}</p>
+//               {report.status === "Processed" && (
+//                 <p className="text-gray-600"><strong>Result:</strong> {report.analysisResult || "No results available"}</p>
+//               )}
+//               <p className="text-gray-400 text-sm mt-2">
+//                 <strong>Date:</strong> {report.createdAt ? new Date(report.createdAt).toLocaleDateString() : "Unknown date"}
+//               </p>
+//             </motion.div>
+//           ))}
+//         </motion.div>
+//       )}
+
+//       {/* Chatbot Toggle Button */}
+//       <button
+//         className="fixed bottom-6 right-6 bg-blue-500 text-white p-4 rounded-full shadow-xl"
+//         onClick={() => setShowChat(!showChat)}
+//       >
+//         💬 Chat
+//       </button>
+
+//       {/* Chatbot Interface */}
+//       <AnimatePresence>
+//         {showChat && (
+//           <motion.div
+//             className="fixed bottom-16 right-6 bg-white shadow-lg rounded-lg p-4 w-72"
+//             initial={{ opacity: 0, y: 100 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             exit={{ opacity: 0, y: 100 }}
+//             transition={{ duration: 0.3 }}
+//           >
+//             <div className="mb-4">
+//               <p className="font-bold text-lg">Chatbot</p>
+//               <textarea
+//                 className="w-full p-2 mt-2 border rounded-md"
+//                 value={chatInput}
+//                 onChange={(e) => setChatInput(e.target.value)}
+//                 placeholder="Ask me something..."
+//               />
+//               <button
+//                 onClick={handleChatSubmit}
+//                 className="mt-2 bg-green-500 text-white p-2 rounded-md w-full"
+//               >
+//                 Send
+//               </button>
+//             </div>
+//             <div className="mt-4">
+//               <p><strong>Response:</strong></p>
+//               <p>{chatResponse}</p>
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </motion.div>
+//   );
+// };
+
+// export default Dashboard;
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -857,7 +1031,12 @@ const Dashboard = () => {
                 Send
               </button>
             </div>
-            <div className="mt-4">
+
+            {/* Chat Response with Scrollable Container */}
+            <div
+              className="mt-4 max-h-32 overflow-y-auto"
+              style={{ minHeight: '50px' }} // Ensuring a minimal height for the chat container
+            >
               <p><strong>Response:</strong></p>
               <p>{chatResponse}</p>
             </div>
@@ -869,4 +1048,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
